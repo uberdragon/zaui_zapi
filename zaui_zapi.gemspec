@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Shane Kretzmann']
   spec.email         = ["Shane.Kretzmann@gmail.com"]
   spec.summary       = %q{Zaui zAPI interface gem}
-  spec.description   = %q{This is a cool ass core data gem.}
+  spec.description   = %q{Provide ruby methods to interact with Zaui zAPI}
   spec.homepage      = ""
   spec.license       = "GNU GENERAL PUBLIC LICENSE Version 2"
 
@@ -19,8 +19,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.7"
-  spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "minitest"
-
-  spec.add_runtime_dependency "activerecord", "~> 4.2.0"
 end
