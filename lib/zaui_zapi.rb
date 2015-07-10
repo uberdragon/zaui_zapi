@@ -1,6 +1,6 @@
 require 'zapi'
 require 'zapi_response'
 require 'zapi_session'
-require 'zapi_user'
+require 'zapi_employee'
 require 'zapi_xml'
 require 'zapi_activity_categories'
