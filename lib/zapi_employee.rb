@@ -1,4 +1,4 @@
-class ZapiUser
+class ZapiEmployee
 
   attr_reader :response, :zapi, :generate_xml, :responder
 
