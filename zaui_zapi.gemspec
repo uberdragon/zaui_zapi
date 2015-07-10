@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = VERSION
   spec.authors       = ['Shane Kretzmann']
   spec.email         = ["Shane.Kretzmann@gmail.com"]
-  spec.summary       = %q{Zaui zAPI interface gem}
+  spec.summary       = %q{Zaui.com zAPI interface gem}
   spec.description   = %q{Provide ruby methods to interact with Zaui zAPI}
   spec.homepage      = "https://github.com/uberdragon/zaui_zapi"
   spec.license       = "GNU GENERAL PUBLIC LICENSE Version 2"
