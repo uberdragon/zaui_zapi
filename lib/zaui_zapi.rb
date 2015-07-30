@@ -1,4 +1,5 @@
 require 'zapi'
+require 'zapi_agent'
 require 'zapi_response'
 require 'zapi_session'
 require 'zapi_employee'

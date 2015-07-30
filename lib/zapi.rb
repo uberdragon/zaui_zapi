@@ -1,3 +1,6 @@
+require 'net/http'
+require 'uri'
+
 class Zapi
 
   attr_reader :uri, :response, :responder

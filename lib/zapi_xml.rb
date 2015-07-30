@@ -1,6 +1,16 @@
 class ZapiXML
 
-  def login username:, password:
+  def agent_login username:, password:
+    _wrap_xml_request({
+      zapiUsername: username,
+      zapiPassword: password,
+      zapiMethod: {
+        methodName: 'zapiAgentLogin',
+      }
+    })
+  end
+
+  def mobile_login username:, password:
     _wrap_xml_request({
       zapiUsername: username,
       zapiPassword: password,

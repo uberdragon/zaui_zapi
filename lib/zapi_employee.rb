@@ -36,7 +36,7 @@ class ZapiEmployee
   end
 
   def _login username:, password:
-    login_xml = generate_xml.login(username: username, password: Digest::MD5.hexdigest(password))
+    login_xml = generate_xml.agent_login(username: username, password: Digest::MD5.hexdigest(password))
     zapi.request(xml: login_xml)
   end
 
