@@ -1,4 +1,4 @@
-class ZapiActivityCategories
+class ZapiPackageCategories
 
   attr_reader :response, :zapi, :generate_xml, :session
 
@@ -9,7 +9,7 @@ class ZapiActivityCategories
   end
 
   def index user_id: session.user_id, api_token: session.api_token
-    categories_xml = generate_xml.get_activity_categories
+    categories_xml = generate_xml.get_package_categories
     @response = zapi.request(xml: categories_xml)
   end
 
