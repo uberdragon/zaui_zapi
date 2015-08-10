@@ -5,7 +5,7 @@ class ZapiEmployee
   def initialize username:, password:, zapi: nil, xml_generator: nil, responder: nil
     @zapi = zapi || Zapi.new()
     @generate_xml = xml_generator  || ZapiXML.new()
-    @responder = responder || ZapiSession
+    @responder = responder || ZapiObject
     @response = _login username: username, password: password
   end
 

@@ -166,7 +166,7 @@ class ZapiXML
           "optionId" => hash[:pricing_option_id],
           "quantity" => hash[:pricing_option_quantity]
         }
-      }
+      },
       "passengers" => {
         "seniors" => hash[:seniors].to_I,
         "adults" => hash[:adults].to_i,

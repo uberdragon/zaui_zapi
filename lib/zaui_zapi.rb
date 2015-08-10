@@ -1,7 +1,7 @@
 require 'zapi'
 require 'zapi_agent'
 require 'zapi_response'
-require 'zapi_session'
+require 'zapi_object'
 require 'zapi_employee'
 require 'zapi_xml'
 require 'zapi_activity_categories'
