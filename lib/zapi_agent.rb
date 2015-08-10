@@ -32,7 +32,7 @@ class ZapiAgent
   end
 
   def session hash: session_hash
-    responder.new(session_hash: hash)
+    responder.new(hash: hash)
   end
 
   def _login username:, password:
