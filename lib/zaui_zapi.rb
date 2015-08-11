@@ -1,3 +1,4 @@
+require 'zaui'
 require 'zapi'
 require 'zapi_agent'
 require 'zapi_response'

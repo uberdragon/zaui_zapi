@@ -11,7 +11,7 @@ class Zapi::ZapiResponse
   end
 
   def raw_hash
-    Hash.from_xml raw_xml
+    Hash.from_xml(raw_xml).with_indifferent_access
   end
 
   def api_version
