@@ -9,11 +9,11 @@ class Zaui
   end
 
   def get_activity_categories
-    raw = _zapi(xml.get_activity_categories)[:categories][:category]
+    raw = _zapi(xml.get_activity_categories).try(:[],'categories').try(:[],'category')
   end
 
   def get_activities_by_category_id id
-    raw = _zapi(xml.get_activities_by_category_id(id))[:activities][:activity]
+    raw = _zapi(xml.get_activities_by_category_id(id)).try(:[],'activities').try(:[],'activity')
   end
 
   def get_package_categories
