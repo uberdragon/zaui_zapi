@@ -152,6 +152,22 @@ class ZapiXML
     })
   end
 
+  def price_quote activity_date:, activity_id:, pickup_location_id:, passengers: {}
+    _wrap_xml_request({
+      "methodName" => 'zapiPriceQuote',
+      "activityId" => activity_id,
+      "activityDate" => activity_date.strftime("%Y-%m-%d"),
+      "passengers" => {
+        "seniors" => passengers[:seniors].to_i,
+        "adults" => passengers[:adults].to_i,
+        "students" => passengers[:students].to_i,
+        "children" => passengers[:children].to_i,
+        "infants" => passengers[:infants].to_i
+      },
+      "pickupLocationId" => pickup_location_id
+    })
+  end
+
   def add_activity_to_cart hash: {}
     _wrap_xml_request({
       "methodName" => 'zapiAddActivityToCart',
@@ -168,7 +184,7 @@ class ZapiXML
         }
       },
       "passengers" => {
-        "seniors" => hash[:seniors].to_I,
+        "seniors" => hash[:seniors].to_i,
         "adults" => hash[:adults].to_i,
         "students" => hash[:students].to_i,
         "children" => hash[:children].to_i,
@@ -189,10 +205,10 @@ class ZapiXML
     })
   end
 
-  def get_activity_details_by_activity_id activity_id:, date: nil
+  def get_activity_details_by_activity_id id, date: nil
     hash = {
       "methodName" => 'zapiGetActivityDetailsByActivityId',
-      "activityId" => activity_id
+      "activityId" => id
     }
     if date
       hash.merge!({
