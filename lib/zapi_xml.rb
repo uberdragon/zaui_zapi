@@ -196,12 +196,14 @@ class ZapiXML
     })
   end
 
-  def remove_activity_cart_item activity_id:, date:
+  def remove_activity_cart_item activity_id:, date: nil
+    date = date.strftime("%Y-%m-%d") if date.is_a? Date
+
     _wrap_xml_request({
       "methodName" => 'zapiRemoveActivityCartItem',
       "cartId" => session.cart_id,
       "activityId" => activity_id,
-      "activityDate" => date.strftime("%Y-%m-%d")
+      "activityDate" => date
     })
   end
 
@@ -229,8 +231,8 @@ class ZapiXML
     _wrap_xml_request({
       "methodName" => 'zapiCheckActivityInventoryByDate',
       "activityId" => hash[:activity_id],
-      "activityDate" => hash[:activity_date].strftime("%Y-%m-%d"),
-      "activityTime" => "HH:MM:SS",
+      "activityDate" => hash[:activity_date],
+      "activityTime" => hash[:activity_time],
       "pickupLocationId" => hash[:pickup_location_id],
       "dropoffLocationId" => hash[:dropoff_location_id],
       "requestedPassengers" => {
@@ -257,7 +259,7 @@ class ZapiXML
     })
   end
 
-  def process_cart_with_payment hash: {}
+  def process_cart_with_payment hash:
     _wrap_xml_request({
       "methodName" => 'zapiProcessCartWithPayment',
       "cartId" => session.cart_id,
