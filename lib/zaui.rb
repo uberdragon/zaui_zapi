@@ -51,6 +51,10 @@ class Zaui
     raw = _zapi(request)
   end
 
+  def promotion_code_apply code:
+    raw = _zapi(xml.promotion_code_apply(promo_code: code))
+  end
+
   def process_cart_with_payment hash: {}
     cart_data = {
       name_on_card: hash[:name_on_card],
