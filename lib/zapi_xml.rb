@@ -169,31 +169,29 @@ class ZapiXML
   end
 
   def add_activity_to_cart hash: {}
-    _wrap_xml_request({
+    for_xml = {
       "methodName" => 'zapiAddActivityToCart',
       "cartId" => session.cart_id,
       "activityId" => hash[:activity_id],
       "activityDate" => hash[:activity_date],
       "activityEndDate" => hash[:activity_end_date],
-      "rentalStartTime" => hash[:rental_start_time],
-      "rentalEndTime" => hash[:rental_end_time],
-      "pricingOptions" => {
-        "option" => {
-          "optionId" => hash[:pricing_option_id],
-          "quantity" => hash[:pricing_option_quantity]
-        }
-      },
+      "rentalStartTime" => nil,
+      "rentalEndTime" => nil,
+      "pricingOptions" => nil,
       "passengers" => {
-        "seniors" => hash[:seniors].to_i,
-        "adults" => hash[:adults].to_i,
-        "students" => hash[:students].to_i,
-        "children" => hash[:children].to_i,
-        "infants" => hash[:infants].to_i
       },
       "activityTime" => hash[:activity_time],
-      "pickupLocationId" => hash[:pickup_location_id],
+      "pickupLocationId" => nil,
       "dropOffLocationId" => hash[:dropoff_location_id]
-    })
+    }
+
+
+    for_xml['passengers']['adults'] = hash[:adults].to_i unless hash[:adults].to_i == 0
+    for_xml['passengers']['children'] = hash[:children].to_i unless hash[:children].to_i == 0
+    for_xml['passengers']['infants'] = hash[:infants].to_i unless hash[:infants].to_i == 0
+    for_xml['pickupLocationId'] = hash[:pickup_location_id].to_i unless hash[:pickup_location_id].blank?
+
+    _wrap_xml_request(for_xml)
   end
 
   def remove_activity_cart_item activity_id:, date: nil

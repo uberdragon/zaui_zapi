@@ -29,7 +29,6 @@ class Zaui
       infants: passengers[:infants],
       pickup_location_id: pickup_location_id
     }
-
     raw = _zapi(xml.add_activity_to_cart(hash: hash))
   end
 
