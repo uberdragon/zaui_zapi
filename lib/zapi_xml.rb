@@ -89,7 +89,7 @@ class ZapiXML
   end
 
   def get_cart_contents
-    _wrap_xml_request({
+    raw = _wrap_xml_request({
       "methodName" => 'zapiGetCartContents',
       "cartId" => session.cart_id
     })
@@ -280,10 +280,39 @@ class ZapiXML
   end
 
   def promotion_code_apply promo_code:
-    _wrap_xml_request({
+    foo = _wrap_xml_request({
       "methodName" => 'zapiPromotionCodeApply',
       "cartId" => session.cart_id,
-      "promotCodeName" => promo_code
+      "promoCodeName" => promo_code
+    })
+  end
+
+  def process_single_transaction hash:
+    _wrap_xml_request({
+      "methodName" => 'zapiProcessSingleTransaction',
+      "cartId" => session.cart_id,
+      "transactionDetails" => {
+        "transactionType" => 2000,
+        "transactionAmount" => hash[:amount],
+        "creditCardDetails" => {
+          "nameOnCard" => hash[:name_on_card],
+          "number" => hash[:cc_num],
+          "expMonth" => hash[:expiration_month],
+          "expYear" => hash[:expiration_year],
+          "csv" => hash[:csv],
+          "cardType" => hash[:card_type],
+          "rawSwipeData" => nil,
+          "track1Data" => nil,
+          "track2Data" => nil
+        }
+      }
+    })
+  end
+
+  def load_booking_into_cart booking_number:
+    _wrap_xml_request({
+      "methodName" => "zapiLoadBookingIntoCart",
+      "bookingNumber" => booking_number
     })
   end
 

@@ -37,8 +37,13 @@ class Zaui
   end
 
   def get_cart_contents
-    activities = _zapi(xml.get_cart_contents).try(:[],'cart').try(:[],'activities').try(:[],'activity')
-    activities.is_a?(Array) ? activities : [activities]
+    raw = _zapi(xml.get_cart_contents)
+    activities = raw.try(:[],'cart').try(:[],'activities').try(:[],'activity')
+    activities = activities.is_a?(Array) ? activities : [activities]
+    {
+      :activities => activities,
+      :total => raw['cart']['remainingBalance']['balance']
+    }
   end
 
   def update_customer_details_to_cart first_name:, last_name:, phone:, email:
@@ -64,6 +69,22 @@ class Zaui
       csv: hash[:csv]
     }
     raw = _zapi(xml.process_cart_with_payment(hash: cart_data))
+  end
+
+  def process_single_transaction hash: {}
+    cart_data = {
+      amount: hash[:amount],
+      name_on_card: hash[:name_on_card],
+      cc_num: hash[:cc_num].gsub(/[^\d]/, ''),
+      expiration_month: hash[:expiration_month],
+      expiration_year: hash[:expiration_year],
+      csv: hash[:csv]
+    }
+    raw = _zapi(xml.process_single_transaction(hash: cart_data))
+  end
+
+  def load_booking_into_cart booking_number:
+    raw = _zapi(xml.load_booking_into_cart)
   end
 
   def get_package_categories
