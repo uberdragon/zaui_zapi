@@ -84,7 +84,7 @@ class Zaui
   end
 
   def load_booking_into_cart booking_number:
-    raw = _zapi(xml.load_booking_into_cart)
+    raw = _zapi(xml.load_booking_into_cart(booking_number: booking_number))
   end
 
   def get_package_categories
