@@ -309,6 +309,13 @@ class ZapiXML
     })
   end
 
+  def email_booking_itinerary booking_number:
+    _wrap_xml_request({
+      "methodName" => "zapiEmailBookingItinerary",
+      "bookingNumber" => booking_number
+    })
+  end
+
   def load_booking_into_cart booking_number:
     _wrap_xml_request({
       "methodName" => "zapiLoadBookingIntoCart",

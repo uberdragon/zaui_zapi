@@ -83,6 +83,10 @@ class Zaui
     raw = _zapi(xml.process_single_transaction(hash: cart_data))
   end
 
+  def email_booking_itinerary booking_number:
+    raw = _zapi(xml.email_booking_itinerary(booking_number: booking_number))
+  end
+
   def load_booking_into_cart booking_number:
     raw = _zapi(xml.load_booking_into_cart(booking_number: booking_number))
   end
