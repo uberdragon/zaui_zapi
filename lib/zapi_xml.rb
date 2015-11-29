@@ -212,7 +212,7 @@ class ZapiXML
     }
     if date
       hash.merge!({
-        "activityDate" => date.strftime("%Y-%m-%d")
+        "activityDate" => date
       })
     end
     _wrap_xml_request(hash)

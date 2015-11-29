@@ -16,8 +16,8 @@ class Zaui
     raw = _zapi(xml.get_activities_by_category_id(id)).try(:[],'activities').try(:[],'activity')
   end
 
-  def get_activity_details_by_activity_id id
-    raw = _zapi(xml.get_activity_details_by_activity_id(id)).try(:[],'activity')
+  def get_activity_details_by_activity_id id, date: nil
+    raw = _zapi(xml.get_activity_details_by_activity_id(id, date: date)).try(:[],'activity')
   end
 
   def add_activity_to_cart id:, date:, passengers: {adults: 0, children: 0, infants: 0}, pickup_location_id: nil
