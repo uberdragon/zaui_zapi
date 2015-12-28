@@ -8,6 +8,26 @@ class Zaui
     @responder = responder || ZapiObject
   end
 
+  def get_products
+    raw = _zapi(xml.get_activity_and_product_catalog).try(:[],'products').try(:[],'product')
+  end
+
+  def get_merchandise_categories
+    raw = _zapi(xml.get_merchandise_categories).try(:[],'categories').try(:[],'category')
+  end
+
+  def get_merchandise_by_category_id id
+    raw = _zapi(xml.get_merchandise_by_category_id(id)).try(:[],'products').try(:[],'product')
+  end
+
+  def add_product_to_cart product_id:, quantity:
+    raw = _zapi(xml.add_product_to_cart(product_id: product_id, quantity: quantity))
+  end
+
+  def get_product_details_by_product_id id
+    raw = _zapi(xml.get_product_details_by_product_id(id)).try(:[],'product')
+  end
+
   def get_activity_categories
     raw = _zapi(xml.get_activity_categories).try(:[],'categories').try(:[],'category')
   end
@@ -36,12 +56,23 @@ class Zaui
     raw = _zapi(xml.remove_activity_cart_item(activity_id: id, date: date))
   end
 
+  def remove_product_cart_item id:
+    raw = _zapi(xml.remove_product_cart_item(product_id: id))
+  end
+
+  def check_product_inventory product_id:, quantity:
+    raw = _zapi(xml.check_product_inventory(product_id: product_id, quantity: quantity))
+  end
+
   def get_cart_contents
     raw = _zapi(xml.get_cart_contents)
     activities = raw.try(:[],'cart').try(:[],'activities').try(:[],'activity')
     activities = activities.is_a?(Array) ? activities : [activities]
+    products = raw.try(:[],'cart').try(:[],'products').try(:[],'product')
+    products = products.is_a?(Array) ? products : [products]
     {
       :activities => activities,
+      :products => products,
       :total => raw['cart']['remainingBalance']['balance']
     }
   end

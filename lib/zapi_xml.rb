@@ -20,6 +20,12 @@ class ZapiXML
     )
   end
 
+ def  get_activity_and_product_catalog
+    _wrap_xml_request({
+      "methodName" => 'zapiGetActivityAndProductCatalog'
+    })
+  end
+
   def get_package_categories
     _wrap_xml_request({
       "methodName" => 'zapiGetPackageCategories'
@@ -125,7 +131,7 @@ class ZapiXML
 
   def remove_product_cart_item product_id:
     _wrap_xml_request({
-      "methodName" => 'zapiAddRemoveProductCartItem',
+      "methodName" => 'zapiRemoveProductCartItem',
       "cartId" => session.cart_id,
       "productId" => product_id
     })
@@ -218,10 +224,10 @@ class ZapiXML
     _wrap_xml_request(hash)
   end
 
-  def get_product_details_by_product_id product_id:
+  def get_product_details_by_product_id id
     _wrap_xml_request({
       "methodName" => 'zapiGetProductDetailsByProductId',
-      "productId" => product_id
+      "productId" => id
     })
   end
 
@@ -330,7 +336,6 @@ class ZapiXML
       "giftCertificate" => gift_certificate
     })
   end
-
 
   def _wrap_xml_request method, params = {}
     if session
