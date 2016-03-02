@@ -17,6 +17,11 @@ class ZapiAgent
     response.try(:[],'methodErrorMessage')
   end
 
+  def history
+#raise response.inspect
+    Zaui.agents_get_profile(agent_id: _user_id)
+  end
+
   def session_hash
     {
       user_id: _user_id,

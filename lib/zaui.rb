@@ -8,6 +8,10 @@ class Zaui
     @responder = responder || ZapiObject
   end
 
+  def agents_get_profile agent_id:, agent_hash:
+    raw = _zapi(xml.agents_get_profile(agent_id: agent_id, agent_hash: agent_hash))
+  end
+
   def get_products
     raw = _zapi(xml.get_activity_and_product_catalog).try(:[],'products').try(:[],'product')
   end
@@ -40,13 +44,16 @@ class Zaui
     raw = _zapi(xml.get_activity_details_by_activity_id(id, date: date)).try(:[],'activity')
   end
 
-  def add_activity_to_cart id:, date:, passengers: {adults: 0, children: 0, infants: 0}, pickup_location_id: nil
+  def add_activity_to_cart id:, date:, end_date:, passengers: {adults: 0, children: 0, infants: 0}, pickup_location_id: nil, rental: {start_time: nil, end_time: nil}
     hash = {
       activity_id: id,
       activity_date: date,
+      activity_end_date: end_date,
       adults: passengers[:adults],
       children: passengers[:children],
       infants: passengers[:infants],
+      rental_start_time: rental[:start_time],
+      rental_end_time: rental[:end_time],
       pickup_location_id: pickup_location_id
     }
     raw = _zapi(xml.add_activity_to_cart(hash: hash))
