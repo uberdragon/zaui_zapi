@@ -44,7 +44,7 @@ class Zaui
     raw = _zapi(xml.get_activity_details_by_activity_id(id, date: date)).try(:[],'activity')
   end
 
-  def add_activity_to_cart id:, date:, end_date:, passengers: {adults: 0, children: 0, infants: 0}, pickup_location_id: nil, rental: {start_time: nil, end_time: nil}
+  def add_activity_to_cart id:, date:, end_date: nil, passengers: {adults: 0, children: 0, infants: 0}, pickup_location_id: nil, rental: {start_time: nil, end_time: nil}
     hash = {
       activity_id: id,
       activity_date: date,
