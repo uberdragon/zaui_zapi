@@ -68,11 +68,13 @@ class Zaui
     raw = _zapi(xml.get_cart_contents)
     activities = raw.try(:[],'cart').try(:[],'activities').try(:[],'activity')
     activities = activities.is_a?(Array) ? activities : [activities]
+    tax = raw.try(:[],'cart').try(:[],'cartTotals').try(:[],'tax')
     products = raw.try(:[],'cart').try(:[],'products').try(:[],'product')
     products = products.is_a?(Array) ? products : [products]
     {
       :activities => activities,
       :products => products,
+      :tax => tax,
       :total => raw['cart']['remainingBalance']['balance']
     }
   end
