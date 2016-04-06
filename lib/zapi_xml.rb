@@ -13,6 +13,14 @@ class ZapiXML
     )
   end
 
+  def agents_get_profile agent_id:, agent_hash:
+    _wrap_xml_request({
+      "methodName" => 'zapiAgents_GetProfile',
+      "agentID" => agent_id,
+      'agentHashKey' => agent_hash
+      })
+  end
+
   def mobile_login username:, password:
     _wrap_xml_request(
       { "methodName" => 'zapiMobileLogin' },
@@ -181,8 +189,8 @@ class ZapiXML
       "activityId" => hash[:activity_id],
       "activityDate" => hash[:activity_date],
       "activityEndDate" => hash[:activity_end_date],
-      "rentalStartTime" => nil,
-      "rentalEndTime" => nil,
+      "rentalStartTime" => hash[:rental_start_time],
+      "rentalEndTime" => hash[:rental_end_time],
       "pricingOptions" => nil,
       "passengers" => {
       },
