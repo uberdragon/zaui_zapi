@@ -96,6 +96,10 @@ class Zaui
     raw = _zapi(request)
   end
 
+  def update_notes_to_cart notes
+    raw = _zapi(xml.update_notes_to_cart(notes))
+  end
+
   def promotion_code_apply code:
     raw = _zapi(xml.promotion_code_apply(promo_code: code))
   end
