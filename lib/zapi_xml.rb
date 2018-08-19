@@ -345,6 +345,13 @@ class ZapiXML
     })
   end
 
+  def get_manifest_entire_day_by_date date:
+    _wrap_xml_request({
+      "methodName" => 'zapiGetManifestEntireDayByDate',
+      "date" => date
+    })
+  end
+
   def _wrap_xml_request method, params = {}
     if session
       request = params.merge({

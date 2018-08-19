@@ -154,6 +154,10 @@ class Zaui
     raw = _zapi(xml.check_activity_inventory_by_date(hash: inventory_data))
   end
 
+  def get_manifest_entire_day_by_date date
+    raw = _zapi(xml.get_manifest_entire_day_by_date(date: date))
+  end
+
   def clear_cart_session
     raw = _zapi(xml.clear_cart_session)
   end

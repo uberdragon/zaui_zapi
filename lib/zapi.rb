@@ -19,7 +19,7 @@ class Zapi
     req.body = xml
 
     @response = responder.new(raw_response: http.request(req))
-
+#raise @response.raw_xml
     @response.data
   end
 
