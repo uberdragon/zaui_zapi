@@ -104,15 +104,21 @@ class Zaui
     raw = _zapi(xml.promotion_code_apply(promo_code: code))
   end
 
-  def process_cart_with_payment hash: {}
-    cart_data = {
-      name_on_card: hash[:name_on_card],
-      cc_num: hash[:cc_num].gsub(/[^\d]/, ''),
-      expiration_month: hash[:expiration_month],
-      expiration_year: hash[:expiration_year],
-      csv: hash[:csv]
-    }
-    raw = _zapi(xml.process_cart_with_payment(hash: cart_data))
+  def process_cart_with_payment hash: {}, paymentMethodType: 2000
+    case paymentMethodType
+    when 2000
+      cart_data = {
+        name_on_card: hash[:name_on_card],
+        cc_num: hash[:cc_num].gsub(/[^\d]/, ''),
+        expiration_month: hash[:expiration_month],
+        expiration_year: hash[:expiration_year],
+        csv: hash[:csv]
+      }
+    when 2003
+      cart_data = {}
+    end
+
+    raw = _zapi(xml.process_cart_with_payment(hash: cart_data, paymentMethodType: paymentMethodType))
   end
 
   def process_single_transaction hash: {}

@@ -271,12 +271,12 @@ class ZapiXML
     })
   end
 
-  def process_cart_with_payment hash:
+  def process_cart_with_payment hash:, paymentMethodType:
     _wrap_xml_request({
       "methodName" => 'zapiProcessCartWithPayment',
       "cartId" => session.cart_id,
       "paymentMethod" => {
-        "paymentMethodType" => 2000
+        "paymentMethodType" => paymentMethodType
       },
       "paymentGatewayId" => nil,
       "creditCardDetails" => {
