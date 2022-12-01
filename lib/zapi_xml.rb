@@ -194,6 +194,7 @@ class ZapiXML
       "pricingOptions" => nil,
       "passengers" => {
       },
+      "checkOnlineThresholds" => nil,
       "activityTime" => hash[:activity_time],
       "pickupLocationId" => nil,
       "dropOffLocationId" => hash[:dropoff_location_id]
@@ -204,6 +205,9 @@ class ZapiXML
     for_xml['passengers']['children'] = hash[:children].to_i unless hash[:children].to_i == 0
     for_xml['passengers']['infants'] = hash[:infants].to_i unless hash[:infants].to_i == 0
     for_xml['pickupLocationId'] = hash[:pickup_location_id].to_i unless hash[:pickup_location_id].blank?
+
+    #new undocumented flag so Zaui validates the activity time against the thresholds (defaulting to 1 for true)
+    for_xml['checkOnlineThresholds'] = hash[:check_online_thresholds].to_i || 1
 
     _wrap_xml_request(for_xml)
   end
